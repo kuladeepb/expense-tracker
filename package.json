@@ -1,0 +1,18 @@
+{
+  "name": "web3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Expense_tracker.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "vite": "^8.0.5"
+  }
+}
