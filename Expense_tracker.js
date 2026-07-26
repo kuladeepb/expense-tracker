@@ -84,6 +84,7 @@ async function loadPersons() {
     );
 
     const persons = await res.json();
+    
 
     const select = document.getElementById("personSelect");
 
@@ -739,8 +740,12 @@ async function loadProfile() {
     );
 
     const profile = await res.json();
+   const emailEl = document.querySelector(".user_email");
+    if (emailEl) emailEl.innerText = profile.email || "";
 
     userBudget = Number(profile.budget) || 0;
+    updateDashboard();
+    updateNotifications();
 
     const nameEl = document.querySelector(".user_name");
     if (nameEl) nameEl.value = profile.name || "";
@@ -988,10 +993,13 @@ async function loadExpenses() {
     });
 
     populateYears();
-    updateDashboard();
-    updateNotifications();
+    
     renderExpenses();
     renderHistory();
+    if (userBudget > 0) {
+    updateDashboard();
+    updateNotifications();
+    }
 
     if (typeof Chart !== "undefined") {
       initCharts();
@@ -1354,10 +1362,10 @@ function handleCategoryChange() {
     input.value = "";
   }
 }
-document.addEventListener("DOMContentLoaded", () => {
-  loadProfile();
-  loadExpenses();
-  loadPersons();
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadProfile();
+  await loadExpenses();
+  await loadPersons();
 });
 
 window.registerUser = registerUser;
